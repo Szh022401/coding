@@ -1,0 +1,59 @@
+class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+
+    TreeNode(int x) {
+        val = x;
+    }
+}
+
+public class BinaryTree {
+    private TreeNode nodeWithMaxDifference;
+    private int maxDifference = 0;
+
+    public TreeNode findMaxDifferenceNode(TreeNode root) {
+        calculateDifference(root);
+        return nodeWithMaxDifference;
+    }
+
+    private int calculateDifference(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+
+        int leftTotal = calculateDifference(node.left);
+        int rightTotal = calculateDifference(node.right);
+        
+        int currentDifference = Math.abs(leftTotal - rightTotal);
+        
+        if (currentDifference > maxDifference) {
+            maxDifference = currentDifference;
+            nodeWithMaxDifference = node;
+        }
+
+        return leftTotal + rightTotal + 1; // total descendants including current node
+    }
+
+    // Method to use this class and find the node with max difference
+    public static void main(String[] args) {
+        BinaryTree binaryTree = new BinaryTree();
+
+        // Example to create a tree:
+        //       1
+        //      / \
+        //     2   3
+        //    /|   |\
+        //   4 5   6 7
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+        root.left.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right.left = new TreeNode(6);
+        root.right.right = new TreeNode(7);
+
+        TreeNode resultNode = binaryTree.findMaxDifferenceNode(root);
+        System.out.println("Node with max difference: " + (resultNode != null ? resultNode.val : "None"));
+    }
+}
