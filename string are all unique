@@ -1,0 +1,7 @@
+/*Determine if the characters of a given string are all unique*/
+
+class Solution {
+    public int UniqChar(String s) {
+        boolean uniq = new boolean [128];
+    }
+}
