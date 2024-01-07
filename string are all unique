@@ -3,5 +3,15 @@
 class Solution {
     public int UniqChar(String s) {
         boolean uniq = new boolean [128];
+        for(char c : s.toCharArray()){
+            int i = (int) c;
+            if(uniq[i]){
+                return false;
+            }else{
+                return true;
+            }
+        }
+         return true;
     }
+
 }
