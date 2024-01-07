@@ -22,11 +22,11 @@ public class Solution {
     if(head == null || head.next == null){
       return head;
     }
-    ListNode n2 = head.next;//记录 next
+    ListNode n2 = head.next;//记录 n2 不然   head.next = newHead; /n1 - n 4 2 就不见了
     ListNode newHead = reverseInPairs(head.next.next);//从n3个开始
     n2.next = head; ///n2 - > n1
     head.next = newHead; /n1 - n 4
 
-    return n2;//2 是next
+    return n2;//记录 n2 是head
   }
 }
