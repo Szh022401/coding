@@ -54,8 +54,10 @@ public class Solution {
    //case  1
     if(left != null && right !=null){
       return root;
-    }
+    }//case 0 else if(left == null && right == null){
+      return null;
+    }//这个可以不写 因为下面的已经判断了 如果 和left都是，right则null函数将到达最终的返回语句：return left != null ? left : right;。既然left是null，就会返回right，这是也null。因此，null无论如何它都会有效地返回
     //case  2 3
-    return left != null ? left : right;
+    return left != null ? left : right;//
   }
 }
