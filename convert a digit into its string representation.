@@ -1,3 +1,15 @@
 /*
 convert a digit into its string representation. 
 */
+class Solution {
+    public int toString(int n) {
+        StringBuild  sb = new StringBuild();
+        do{
+            int dig = n % 10;// Get the last digit
+            char  toChar = (char) (dig + '0');// Convert digit to its character representation
+            sb.insert(0, toChar);// Insert the character at the beginning of the StringBuilder
+            n /= 10;
+        }while(n>0);
+         return sb.toString();
+    }
+}
