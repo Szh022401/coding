@@ -22,11 +22,11 @@ public class Solution {
     if(head == null || head.next == null){
       return head;
     }
-    ListNode next = head.next;
-    ListNode newHead = reverseInPairs(head.next.next);
-    head.next.next = head;
-    head.next = newHead;
+    ListNode n2 = head.next;//记录 next
+    ListNode newHead = reverseInPairs(head.next.next);//从n3个开始
+    n2.next = head; ///n2 - > n1
+    head.next = newHead; /n1 - n 4
 
-    return next;
+    return n2;//2 是next
   }
 }
