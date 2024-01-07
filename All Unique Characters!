@@ -4,7 +4,7 @@ All Unique Characters!
 
 class Solution {
     public boolean UniqChar(String s) {
-      boolean unqi = new [26];//size 26
+      boolean unqi = new  boolean[26];//size 26
       for(int i = 0; i <s.length();i++){
         int index = s.toChar(i) - 'a'; // like 'b' - 'a'
         if(unqi[index]){//index - 1
