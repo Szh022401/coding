@@ -17,7 +17,7 @@ public class Solution {
     }
     int getLeft = numNodesLeft(root.left);
     int getright = numNodesLeft(root.right);
-     root.numNodesLeft = getLeft;
-    return getLeft + getright  +1 ;
+     root.numNodesLeft = getLeft; // 把这个地方的左边有点多少个node 填上
+    return getLeft + getright  +1 ;//左边加右边加自己
   }
 }
