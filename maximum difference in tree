@@ -2,38 +2,38 @@ class TreeNode {
     int val;
     TreeNode left;
     TreeNode right;
+    int numNodesLeft;  // Assuming we might also want to store the number of nodes in the left subtree, as per your previous question
 
     TreeNode(int x) {
         val = x;
     }
 }
 
-public class BinaryTree {
-    private TreeNode nodeWithMaxDifference;
-    private int maxDifference = 0;
-
-    public TreeNode findMaxDifferenceNode(TreeNode root) {
-        calculateDifference(root);
-        return nodeWithMaxDifference;
+public class Solution {
+    // Method to find the TreeNode with the maximum difference in the number of descendants between its left and right subtrees
+    public TreeNode maxDiff(TreeNode root) {
+        int[] globalMax = new int[1]; // Array to store the max difference
+        TreeNode[] solu = new TreeNode[1]; // Array to store the node with max difference
+        maxDiffNode(root, globalMax, solu); // Starting the recursive method
+        return solu[0]; // Returning the node with the max difference
     }
 
-    private int calculateDifference(TreeNode node) {
-        if (node == null) {
-            return 0;
+    // Recursive helper method to calculate the difference and find the node
+    private int maxDiffNode(TreeNode root, int[] globalMax, TreeNode[] solu) {
+        if (root == null) return 0;
+
+        int leftTotal = maxDiffNode(root.left, globalMax, solu);
+        int rightTotal = maxDiffNode(root.right, globalMax, solu);
+
+        int currentDiff = Math.abs(leftTotal - rightTotal);
+        if (currentDiff > globalMax[0]) {
+            globalMax[0] = currentDiff;
+            solu[0] = root;
         }
 
-        int leftTotal = calculateDifference(node.left);
-        int rightTotal = calculateDifference(node.right);
-        
-        int currentDifference = Math.abs(leftTotal - rightTotal);
-        
-        if (currentDifference > maxDifference) {
-            maxDifference = currentDifference;
-            nodeWithMaxDifference = node;
-        }
-
-        return leftTotal + rightTotal + 1; // total descendants including current node
+        return leftTotal + rightTotal + 1; // Return the total count of nodes under this root
     }
+
 
     // Method to use this class and find the node with max difference
     public static void main(String[] args) {
