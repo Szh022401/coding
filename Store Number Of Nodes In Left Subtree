@@ -1,0 +1,23 @@
+/**
+ * public class TreeNodeLeft {
+ *   public int key;
+ *   public TreeNodeLeft left;
+ *   public TreeNodeLeft right;
+ *   public int numNodesLeft;
+ *   public TreeNodeLeft(int key) {
+ *     this.key = key;
+ *   }    
+ * }
+ */
+public class Solution {
+  public int numNodesLeft(TreeNodeLeft root) {
+    // Write your solution here
+    if(root == null  ){
+      return 0;
+    }
+    int getLeft = numNodesLeft(root.left);
+    int getright = numNodesLeft(root.right);
+     root.numNodesLeft = getLeft;
+    return getLeft + getright  +1 ;
+  }
+}
