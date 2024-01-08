@@ -1,0 +1,6 @@
+/*
+lowercase letter to uppercase
+*/
+public static char toUp(char lower){
+      return char(low - ' a' + 'A');
+}
