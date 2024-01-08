@@ -1,0 +1,65 @@
+/* 
+2.2 Validate if a given string is numeric. (验证字符串)
+
+Some examples:
+"0" => true
+"0.1" => true
+"abc" => false
+"1 a" => false
+"2.0e-10" => true
+“2e” => false
+“-2e+15” => true
+“2e1.5” => false
+“2e.15” => false
+*/
+
+public class Solution {
+    public boolean isNumber(String s) {
+        String str = s.trim();
+        boolean seenNumber = false;
+        boolean seenSignBeforeE = false;
+        boolean seenE = false;
+        boolean seenPoint = false;
+        boolean seenNumberAfterE = false;
+        boolean seenSignAfterE = false;
+        
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            // If current character is '+' or '-'
+            if (c == '+' || c == '-') {
+                // If we've seen a point or number and not an 'e' (or we've seen an 'e' and a number after it), it's not valid
+                if (((seenPoint || seenNumber) && !seenE) || (seenE && seenNumberAfterE)) {
+                    return false;
+                }
+                if (seenE) {
+                    seenSignAfterE = true;
+                } else {
+                    seenSignBeforeE = true;
+                }
+            } else if (c >= '0' && c <= '9') {
+                seenNumber = true;
+                if (seenE) {
+                    seenNumberAfterE = true;
+                }
+            } else if (c == 'e' || c == 'E') {
+                if (seenE || !seenNumber) {
+                    return false;
+                }
+                seenE = true;
+            } else if (c == '.') {
+                if (seenE || seenPoint) {
+                    return false;
+                }
+                seenPoint = true;
+            } else {
+                return false;
+            }
+        }
+        
+        if (seenE && !seenNumberAfterE) {
+            return false;
+        }
+        
+        return seenNumber;
+    }
+}
